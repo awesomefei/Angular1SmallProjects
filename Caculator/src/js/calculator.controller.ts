@@ -1,12 +1,12 @@
 namespace Calculator{
     export class ApplicationController {
         public result = 0;
-        public num1 :number= null;
-        public num2: number = null;
+        public calculateNumber1 :number= null;
+        public calculateNumber2: number = null;
         public operator : string = null;       
-        private number;
+        private dispalyNumber;
 
-        public displayInpute (input){
+        public displayInput (input){
 
             // Input is reset
             if(input == 'reset'){
@@ -17,31 +17,27 @@ namespace Calculator{
             // Input is digit
              if(input >= 0 && input <= 9){
                 if(this.operator == null){
-                    this.num1 = this.num1*10+input;
-                    this.number = this.num1;
-                    //this.result = this.num1;
-                    console.log('input is num1, result is '+this.result);                              
+                    this.calculateNumber1 = this.calculateNumber1 * 10 +input;
+                    this.dispalyNumber = this.calculateNumber1;
                 }else{
-                    this.num2 = this.num2*10+input;
-                    this.number = this.num2;
-                    
-                    
+                    this.calculateNumber2 = this.calculateNumber2 * 10 + input;
+                    this.dispalyNumber = this.calculateNumber2;
                 }
             }
             // Input is operator.
             else {
-                if(this.num1 != null){
+                if(this.calculateNumber1 != null){
                     if(input != '='){
                         this.operator = input; 
                     }else{
                         if(this.operator == '+'){
-                        this.add(this.num1, this.num2);
+                        this.add(this.calculateNumber1, this.calculateNumber2);
                         }else if(this.operator == '-'){
-                            this.substract(this.num1, this.num2);
+                            this.substract(this.calculateNumber1, this.calculateNumber2);
                         }else if(this.operator == '*'){
-                            this.mutiply(this.num1, this.num2);
+                            this.mutiply(this.calculateNumber1, this.calculateNumber2);
                         }else if(this.operator == '/'){
-                            this.divide(this.num1, this.num2);
+                            this.divide(this.calculateNumber1, this.calculateNumber2);
                         }
                         this.returnResult();
                     }
@@ -52,30 +48,30 @@ namespace Calculator{
         }
         reset(){
                 this.result = 0;
-                this.num1 = null;
-                this. num2 = null;
+                this.calculateNumber1 = null;
+                this. calculateNumber2 = null;
                 this.operator = null;       
-                this.number = 0;            
+                this.dispalyNumber = 0;            
         }
         returnResult(){
-            this.number = this.result;
-            this.num1 = this.number;
-            this.num2 = null;
+            this.dispalyNumber = this.result;
+            this.calculateNumber1 = this.dispalyNumber;
+            this.calculateNumber2 = null;
             this.operator = null;
         }
         add(a,b){
-            this.num1 = a;
-            this.num2 = b;
+            this.calculateNumber1 = a;
+            this.calculateNumber2 = b;
             this.result = a +b ;
         }
         substract(a,b){
-            this.num1 = a;
-            this.num2 = b;
+            this.calculateNumber1 = a;
+            this.calculateNumber2 = b;
             this.result = a - b ;
         }
         divide(a,b){
-            this.num1 = a;
-            this.num2 = b;
+            this.calculateNumber1 = a;
+            this.calculateNumber2 = b;
             
             if(b == 0){
                 return 'ERROR';
@@ -84,8 +80,8 @@ namespace Calculator{
             }             
         }
         mutiply(a,b){
-            this.num1 = a;
-            this.num2 = b;
+            this.calculateNumber1 = a;
+            this.calculateNumber2 = b;
              this.result = a *b;
         }
         constructor(){
