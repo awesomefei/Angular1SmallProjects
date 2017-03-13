@@ -7,37 +7,44 @@ namespace Calculator{
         private number;
 
         public displayInpute (input){
+
+            // Input is reset
             if(input == 'reset'){
                 this.reset();
+                return;
             }
-            else if(input>= 0 && input <= 9){
+
+            // Input is digit
+             if(input >= 0 && input <= 9){
                 if(this.operator == null){
                     this.num1 = this.num1*10+input;
                     this.number = this.num1;
-                    this.result = this.num1;                              
+                    //this.result = this.num1;
+                    console.log('input is num1, result is '+this.result);                              
                 }else{
                     this.num2 = this.num2*10+input;
                     this.number = this.num2;
-                    if(this.operator == '+'){
-                        console.log('!!!!!!!!!add()');                       
-                        this.add(this.num2);
-                    }else if(this.operator == '-'){
-                        console.log('!!!!!!!!!substract()');
-                        this.substract(this.num2);
-                    }else if(this.operator == '*'){
-                        console.log('!!!!!!!!!multiply()');
-                        this.mutiply(this.num2);
-                    }else if(this.operator == '/'){
-                        console.log('!!!!!!!!!divide()');
-                        this.divide(this.num2);
-                    }
+                    
+                    
                 }
-            }else{
+            }
+            // Input is operator.
+            else {
                 if(this.num1 != null){
-                   this.operator = input;                                    
-                   if(this.operator == '='){       
+                    if(input != '='){
+                        this.operator = input; 
+                    }else{
+                        if(this.operator == '+'){
+                        this.add(this.num1, this.num2);
+                        }else if(this.operator == '-'){
+                            this.substract(this.num1, this.num2);
+                        }else if(this.operator == '*'){
+                            this.mutiply(this.num1, this.num2);
+                        }else if(this.operator == '/'){
+                            this.divide(this.num1, this.num2);
+                        }
                         this.returnResult();
-                   }
+                    }
                 }else{
                     alert('ERROR')
                 }
@@ -56,23 +63,30 @@ namespace Calculator{
             this.num2 = null;
             this.operator = null;
         }
-        add(a){
-             this.result += a;
+        add(a,b){
+            this.num1 = a;
+            this.num2 = b;
+            this.result = a +b ;
         }
-        substract(a){
-            console.log(this.result);
-            this.result = this.result-a;
-            console.log(this.result);
+        substract(a,b){
+            this.num1 = a;
+            this.num2 = b;
+            this.result = a - b ;
         }
-        divide(a){
-            if(a==0){
+        divide(a,b){
+            this.num1 = a;
+            this.num2 = b;
+            
+            if(b == 0){
                 return 'ERROR';
             }else{
-                 this.result=this.result/a;
+                 this.result = a / b ;
             }             
         }
-        mutiply(a){
-             this.result = this.result*a;
+        mutiply(a,b){
+            this.num1 = a;
+            this.num2 = b;
+             this.result = a *b;
         }
         constructor(){
 
